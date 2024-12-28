@@ -1,9 +1,14 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from .models import *
 from django.contrib.auth.models import User
 import os
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DetailView, ListView
+from django.db.models import Q
 
 
 # Create your views here.
@@ -57,6 +62,12 @@ def user_home(req):
     if 'user' in req.session:
         return render(req,'user/home.html')
 
+# ---------------- customer ----------------
+
+def customer(req):
+    if 'admin' in req.session:
+        return render(req,'admin/customer.html') 
+    
 
 
 # -----------------register-------------------

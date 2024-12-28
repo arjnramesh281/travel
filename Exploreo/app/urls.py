@@ -11,6 +11,8 @@ urlpatterns=[
 
         # admin page
     path('admin_home',views.admin_home),
+        # customer page
+    path('customer',views.customer),
 
 
         # user page
