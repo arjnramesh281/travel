@@ -8,9 +8,63 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/admin/home.css' %}">
+    <style>
+        .users-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .page-title {
+            color: #2C3E50;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .table {
+            margin-bottom: 0;
+        }
+        
+        .table thead {
+            background-color: #2C3E50;
+            color: white;
+        }
+        
+        .table thead th {
+            border: none;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        
+        .table tbody tr:hover {
+            background-color: rgba(44, 62, 80, 0.05);
+        }
+        
+        .table tbody td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+        
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(44, 62, 80, 0.02);
+        }
+        
+        @media (max-width: 768px) {
+            .users-card {
+                padding: 1rem;
+            }
+        
+            .table thead th,
+            .table tbody td {
+                padding: 0.75rem;
+            }
+        }
+        </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top mb-4">
         <div class="container-fluid">
             <div class="logo me-4">
                 <div class="logo">
@@ -31,7 +85,7 @@
                         <a class="nav-link" href="#"><i class="fas fa-calendar-check"></i>Bookings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-route"></i>Tour Packages</a>
+                        <a class="nav-link" href="../tours"><i class="fas fa-route"></i>Tour Packages</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../customer"><i class="fas fa-users"></i>Customers</a>
@@ -58,39 +112,38 @@
     </nav>
 
 
-            <div class="recent-activity">
-                <h5 class="mb-4">Recent Activity</h5>
-                <div class="activity-item">
-                    <div class="activity-icon bg-primary">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <div class="activity-details">
-                        <h6 class="mb-1">New booking: European Adventure Package</h6>
-                        <small class="text-muted">John Doe • 2 hours ago</small>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon bg-success">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="activity-details">
-                        <h6 class="mb-1">Tour completed: Asian Cultural Experience</h6>
-                        <small class="text-muted">Tour Guide: Sarah Smith • Today</small>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon bg-warning">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="activity-details">
-                        <h6 class="mb-1">New Review: 5 stars for Safari Adventure</h6>
-                        <small class="text-muted">Jane Wilson • 1 day ago</small>
-                    </div>
-                </div>
-            </div>
+   
+  
+<div class="container mt-5" style="margin-top: 400px;">
+    <div class="users-card">
+        <h2 class="page-title">
+            <i class="fas fa-users me-2"></i>
+            All Users
+        </h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Last Login</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.last_login }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
-
+</div>
     
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

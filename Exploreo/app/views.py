@@ -45,6 +45,12 @@ def log(req):
 def admin_home(req):
     if 'admin' in req.session:
         return render(req,'admin/home.html')
+    
+
+# --------------tours------------
+def tours(req):
+    # tours=Tour.objects.all()
+    return render(req,'admin/tours.html',{'tours':tours})
 
 
 # -------------logout----------------
@@ -65,8 +71,8 @@ def user_home(req):
 # ---------------- customer ----------------
 
 def customer(req):
-    if 'admin' in req.session:
-        return render(req,'admin/customer.html') 
+    users=User.objects.all()
+    return render(req,'admin/customer.html',{'users':users})
     
 
 
@@ -86,3 +92,12 @@ def reg(req):
         return redirect(log)
     else:
          return render(req,'user/register.html')
+    
+
+    # -----------------contact----------------
+
+def contact(req):
+    if 'user' in req.session:
+        return render(req,'user/contact.html')
+    if 'admin' in req.session:
+        return render(req,'admin/contact.html')
