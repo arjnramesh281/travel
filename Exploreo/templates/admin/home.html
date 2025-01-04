@@ -57,7 +57,7 @@
         </div>
     </nav>
 
-    <!-- <div class="main-content">
+    <div class="main-content">
         <div class="container-fluid">
             <div class="dashboard-header">
                 <h4 class="dashboard-title">Dashboard Overview</h4>
@@ -72,7 +72,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="dashboard-card">
                         <h5><i class="fas fa-calendar-check text-primary"></i>Total Bookings</h5>
-                        <h2>1,234</h2>
+                        <h2>{{ total_bookings }}</h2>
                         <div class="trend-indicator trend-up">
                             <i class="fas fa-arrow-up"></i>
                             12.5% vs last week
@@ -82,7 +82,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="dashboard-card">
                         <h5><i class="fas fa-route text-success"></i>Active Tours</h5>
-                        <h2>42</h2>
+                        <h2>{{ active_tours }}</h2>
                         <div class="trend-indicator trend-up">
                             <i class="fas fa-arrow-up"></i>
                             8.3% vs last week
@@ -92,7 +92,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="dashboard-card">
                         <h5><i class="fas fa-dollar-sign text-warning"></i>Total Revenue</h5>
-                        <h2>$45,678</h2>
+                        <h2>${{ total_revenue }}</h2>
                         <div class="trend-indicator trend-up">
                             <i class="fas fa-arrow-up"></i>
                             15.2% vs last week
@@ -102,7 +102,7 @@
                 <div class="col-xl-3 col-md-6">
                     <div class="dashboard-card">
                         <h5><i class="fas fa-star text-danger"></i>Customer Rating</h5>
-                        <h2>4.8/5.0</h2>
+                        <h2>{{ customer_rating }}/5.0</h2>
                         <div class="trend-indicator trend-down">
                             <i class="fas fa-arrow-down"></i>
                             0.2 vs last week
@@ -111,38 +111,38 @@
                 </div>
             </div>
 
-            <div class="recent-activity">
-                <h5 class="mb-4">Recent Activity</h5>
-                <div class="activity-item">
-                    <div class="activity-icon bg-primary">
-                        <i class="fas fa-plane"></i>
-                    </div>
-                    <div class="activity-details">
-                        <h6 class="mb-1">New booking: European Adventure Package</h6>
-                        <small class="text-muted">John Doe • 2 hours ago</small>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon bg-success">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="activity-details">
-                        <h6 class="mb-1">Tour completed: Asian Cultural Experience</h6>
-                        <small class="text-muted">Tour Guide: Sarah Smith • Today</small>
-                    </div>
-                </div>
-                <div class="activity-item">
-                    <div class="activity-icon bg-warning">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="activity-details">
-                        <h6 class="mb-1">New Review: 5 stars for Safari Adventure</h6>
-                        <small class="text-muted">Jane Wilson • 1 day ago</small>
-                    </div>
-                </div>
+            <!-- New Section for Viewing Added Packages -->
+            <div class="tour-packages-section mt-5">
+                <h4 class="dashboard-title">Tour Packages</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Package Name</th>
+                            <th>Destination</th>
+                            <th>Price</th>
+                            <th>Duration</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for package in packages %}
+                            <tr>
+                                <td>{{ package.package_name }}</td>
+                                <td>{{ package.destination }}</td>
+                                <td>${{ package.price }}</td>
+                                <td>{{ package.duration_days }} days</td>
+                                <td>{{ package.start_date }}</td>
+                                <td>{{ package.end_date }}</td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="6">No packages available</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div> -->
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
