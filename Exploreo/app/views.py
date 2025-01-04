@@ -42,16 +42,15 @@ def log(req):
 # --------------admin home------------
 
 
-
 def admin_home(request):
     if 'admin' in request.session:
         # Fetch all tour packages
         packages = TourPackage.objects.all()
 
         # Calculate other data for dashboard overview
-        total_bookings = 1234  # Example: Replace with actual calculation
+        total_bookings = 34  # Example: Replace with actual calculation
         active_tours = packages.count()  # Total number of active tours
-        total_revenue = 45678  # Example: Replace with actual revenue calculation
+        total_revenue = 456  # Example: Replace with actual revenue calculation
         customer_rating = 4.8  # Example: Replace with actual rating
 
         # Pass data to the template
