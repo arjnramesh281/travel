@@ -15,6 +15,9 @@ urlpatterns=[
         # tours page
     path('tours',views.tours),    
 
+        # edit tours
+    path('edit_tour/<id>',views.edit_tour),
+
         # customer page
     path('customer',views.customer),
 

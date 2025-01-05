@@ -112,6 +112,45 @@ def tours(req):
             return render(req, 'admin/tours.html')  # Render the form for GET request
     else:
         return redirect(log)  # Redirect to login if not an admin
+    
+# -------------edit tour----------------
+
+
+def edit_tour(req,id):
+    if 'admin' in req.session:  # Check if admin is logged in
+        try:
+            # Fetch the existing product by ID
+            packages = TourPackage.objects.get(id=id)
+        except TourPackage.DoesNotExist:
+            # Handle the case where the product does not exist
+            return redirect(edit_tour)
+
+        if req.method == 'POST':
+            # Update product details
+            packages.package_name = req.POST.get('package_name')
+            packages.destination = req.POST.get('destination')
+            packages.duration_days = req.POST.get('duration_days')
+            packages.price = req.POST.get('price')
+            packages.rating = req.POST.get('rating')
+            packages.description = req.POST.get('description')
+            packages.max_capacity = req.POST.get('max_capacity')
+            packages.start_date = req.POST.get('start_date')
+            packages.end_date = req.POST.get('end_date')
+            packages.accommodation = req.POST.get('accommodation') == 'on'
+            packages.meals = req.POST.get('meals') == 'on'
+            packages.transport = req.POST.get('transport') == 'on'
+
+            # Check if an image was uploaded
+            if 'img' in req.FILES:
+                packages.img = req.FILES['img']
+
+            # Validate and save the updated product
+            packages.save()  
+            return redirect(admin_home)  # Redirect to product list or desired page
+        else:
+            return render(req, 'admin/edit_tours.html', {'packages': packages})
+    else:
+        return redirect(log)  # Redirect to login if not an admin
 
 
 # -------------logout----------------
