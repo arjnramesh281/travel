@@ -18,8 +18,14 @@ urlpatterns=[
         # edit tours
     path('edit_tour/<id>',views.edit_tour),
 
+        # delete tours
+    path('delete_tour/<int:id>/', views.delete_tour, name='delete_tour'),
+
         # customer page
     path('customer',views.customer),
+
+
+# ----------------user section---------------
 
 
         # user page
@@ -27,6 +33,9 @@ urlpatterns=[
 
         # contact page
     path('contact',views.contact),
+
+        # user tour
+    path('user_tour',views.user_tours),
 
         # logout
     path('logout',views.admin_logout),

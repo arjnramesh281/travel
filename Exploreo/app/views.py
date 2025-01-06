@@ -9,6 +9,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView
 from django.db.models import Q
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -107,7 +108,7 @@ def tours(req):
                 transport=transport
             )
             data.save()
-            return redirect(tours)  # Redirect after saving
+            return redirect(admin_home)  # Redirect after saving
         else:
             return render(req, 'admin/tours.html')  # Render the form for GET request
     else:
@@ -153,6 +154,20 @@ def edit_tour(req,id):
         return redirect(log)  # Redirect to login if not an admin
 
 
+#-------------delete tour------------
+
+def delete_tour(req,id):
+    if 'admin' in req.session:
+        try:
+            tours = TourPackage.objects.get(id=id)
+            tours.delete()
+            return redirect(admin_home)
+        except TourPackage.DoesNotExist:
+            pass  
+            return redirect(tours)
+    else:
+        return redirect(log)
+
 # -------------logout----------------
 
 
@@ -161,6 +176,12 @@ def admin_logout(req):
     req.session.flush()
     return redirect(log)
 
+# ---------------- customer ----------------
+
+def customer(req):
+    users=User.objects.all()
+    return render(req,'admin/customer.html',{'users':users})
+    
 
 # ----------------user home----------------
 
@@ -168,12 +189,6 @@ def user_home(req):
     if 'user' in req.session:
         return render(req,'user/home.html')
 
-# ---------------- customer ----------------
-
-def customer(req):
-    users=User.objects.all()
-    return render(req,'admin/customer.html',{'users':users})
-    
 
 
 # -----------------register-------------------
@@ -194,10 +209,18 @@ def reg(req):
          return render(req,'user/register.html')
     
 
-    # -----------------contact----------------
+# -----------------contact----------------
 
 def contact(req):
     if 'user' in req.session:
         return render(req,'user/contact.html')
     if 'admin' in req.session:
         return render(req,'admin/contact.html')
+    
+# -----------------user tours----------------
+
+def user_tours(req):
+    if 'user' in req.session:
+        packages=TourPackage.objects.all()
+
+        return render(req,'user/tours.html',{'packages':packages})

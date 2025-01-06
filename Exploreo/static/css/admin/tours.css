@@ -133,3 +133,52 @@ body {
         max-height: 55px;
     }
 }
+
+
+.admin-footer {
+    background: white;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 0.9rem;
+}
+
+.footer-copyright p {
+    color: #666;
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: #666;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .admin-footer {
+        text-align: center;
+        padding: 1.5rem 0;
+    }
+
+    .footer-links {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .footer-links a {
+        font-size: 0.85rem;
+    }
+}
