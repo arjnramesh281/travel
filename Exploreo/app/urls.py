@@ -37,6 +37,11 @@ urlpatterns=[
         # user tour
     path('user_tour',views.user_tours),
 
+        # user tour details
+    path('view_tour/<id>', views.user_tour_details, name='user_tour_details'),
+
+
+
         # logout
     path('logout',views.admin_logout),
     

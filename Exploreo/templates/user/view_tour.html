@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploreo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/user/tour.css' %}">
+    <style>
+:root {
+    --primary-color: #e1e1e1;
+    --secondary-color: #E67E22;
+    --accent-color: #3498DB;
+    --light-bg: #F5F6FA;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--light-bg);
+}
+
+.navbar {
+    background-color: var(--primary-color);
+    /* padding: 1rem 2rem; */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    color: rgb(46, 44, 44) !important;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: rgba(0, 0, 0, 0.9) !important;
+    margin: 0 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+
+.package-banner {
+    height: 70vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.1);
+    animation: zoomBanner 20s infinite alternate ease-in-out;
+}
+
+.banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+    display: flex;
+    align-items: flex-end;
+    padding: 4rem 2rem;
+}
+
+.banner-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    color: white;
+    padding: 0 2rem;
+}
+
+.package-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease;
+}
+
+.quick-info {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    animation: fadeInUp 1s ease 0.2s backwards;
+}
+
+.quick-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.quick-info-item i {
+    color: #E67E22;
+}
+
+.details-container {
+    max-width: 1400px;
+    margin: -100px auto 0;
+    position: relative;
+    z-index: 2;
+    padding: 0 2rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.main-content {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(to right, #E67E22, #F1C40F);
+    border-radius: 2px;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.highlight-item:hover {
+    transform: translateY(-5px);
+}
+
+.highlight-item i {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 10px;
+    color: #E67E22;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(230,126,34,0.1);
+}
+
+.itinerary-day {
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.itinerary-day::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #E67E22;
+    opacity: 0.3;
+}
+
+.day-title {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+.booking-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    position: sticky;
+    top: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.price-tag {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.price-tag span {
+    font-size: 1rem;
+    color: #666;
+    font-weight: normal;
+}
+
+.booking-info {
+    margin: 1.5rem 0;
+    padding: 1.5rem 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.book-btn {
+    width: 100%;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #E67E22, #F1C40F);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.book-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(230,126,34,0.2);
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.gallery-img {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 200px;
+}
+
+.gallery-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-img:hover img {
+    transform: scale(1.1);
+}
+
+@keyframes zoomBanner {
+    0% { transform: scale(1.1); }
+    100% { transform: scale(1.2); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 992px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .booking-card {
+        position: static;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .package-banner {
+        height: 50vh;
+    }
+    
+    .banner-overlay {
+        padding: 2rem 1rem;
+    }
+    
+    .details-container {
+        padding: 0 1rem;
+        margin-top: -50px;
+    }
+    
+    .main-content {
+        padding: 1.5rem;
+    }
+    
+    .highlights {
+        grid-template-columns: 1fr;
+    }
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: rgba(0, 0, 0, 0.9);
+    padding: 4rem 0 1rem;
+    margin-top: 4rem;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.footer h4 {
+    color: rgb(0, 0, 0);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.footer h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--secondary-color);
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: rgba(0, 0, 0, 0.9);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.59);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+    color: white;
+}
+
+.newsletter-form .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgb(0, 0, 0);
+    padding: 0.75rem;
+}
+
+.newsletter-form .form-control::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.newsletter-form .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: var(--secondary-color);
+    box-shadow: none;
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    margin-bottom: 0;
+}
+
+.footer-bottom .fa-heart {
+    color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 3rem 0 1rem;
+    }
+    
+    .footer-bottom {
+        text-align: center;
+    }
+    
+    .footer-bottom .text-md-end {
+        text-align: center !important;
+        margin-top: 0.5rem;
+    }
+}
+</style>
+</head>
+<body>
+
+       <!-- Navigation -->
+       <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="{% static '/images/logo32.png' %}" alt="Exploreo Logo" style="height: 80px; width: 80px;">
+                <span class="ms-2" style="font-family: 'Courier New', monospace;">Exploreo</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../user_home"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-map-marked-alt me-1"></i>Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../user_tour"><i class="fas fa-calendar-alt me-1"></i>Tours</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../contact"><i class="fas fa-phone me-1"></i>Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Tour Package Details -->
+    <div class="package-banner">
+        <img src="{{ packages.image.url }}" alt="Tour Package" class="banner-image">
+        <div class="banner-overlay">
+            <div class="banner-content">
+                <h1 class="package-title text-light">{{ packages.package_name }}</h1>
+                <div class="quick-info">
+                    <div class="quick-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ packages.destination }}</span>
+                    </div>
+                    <div class="quick-info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>{{ packages.duration_days }} Days</span>
+                    </div>
+                    <div class="quick-info-item">
+                        <i class="fas fa-star"></i>
+                        <span>{{ packages.rating }}(124 Reviews)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="details-container mt-3">
+        <div class="details-grid">
+            <div class="main-content">
+                <section>
+                    <h2 class="section-title">Overview</h2>
+                    <p class="description">
+                        Embark on an unforgettable journey through {{ packages.destination }}. 
+                        This carefully curated {{ packages.duration_days }}-day adventure combines cultural immersion,
+                        natural wonders, and luxurious comfort to create the perfect escape.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="section-title">Highlights</h2>
+                    <div class="highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-hotel"></i>
+                            <span>{{ packages.accommodation }}-Luxury Accommodations</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-utensils"></i>
+                            <span>{{ packages.meals }}-Gourmet Dining</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-car"></i>
+                            <span>{{ packages.transport }}-Private Transportation</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-camera"></i>
+                            <span>Guided Tours</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- <section>
+                    <h2 class="section-title">Gallery</h2>
+                    <div class="gallery">
+                        <div class="gallery-img">
+                            <img src="/api/placeholder/400/300" alt="Tour 1">
+                        </div>
+                        <div class="gallery-img">
+                            <img src="/api/placeholder/400/300" alt="Tour 2">
+                        </div>
+                        <div class="gallery-img">
+                            <img src="/api/placeholder/400/300" alt="Tour 3">
+                        </div>
+                        <div class="gallery-img">
+                            <img src="/api/placeholder/400/300" alt="Tour 4">
+                        </div>
+                    </div>
+                </section> -->
+
+                <section>
+                    <h2 class="section-title">Itinerary</h2>
+                    <div class="itinerary-day">
+                        <h3 class="day-title">Day 1: Arrival & Welcome</h3>
+                        <p>Airport pickup, luxury hotel check-in, welcome dinner with local cuisine</p>
+                    </div>
+                    <div class="itinerary-day">
+                        <h3 class="day-title">Day 2: Cultural Exploration</h3>
+                        <p>Visit historical sites, traditional market tour, cooking class</p>
+                    </div>
+                    <div class="itinerary-day">
+                        <h3 class="day-title">Day 3: Nature Adventure</h3>
+                        <p>Hiking, wildlife spotting, picnic lunch, sunset viewing</p>
+                    </div>
+                </section>
+            </div>
+
+            <aside>
+                <div class="booking-card">
+                    <div class="price-tag">${{ packages.price }} <span>Price</span></div>
+                    <div class="booking-info">
+                        <div class="info-item">
+                            <span>Start Date</span>
+                            <strong>{{ packages.start_date }}</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>End Date</span>
+                            <strong>{{ packages.end_date }}</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Group Size</span>
+                            <strong>{{ packages.max_capacity }}</strong>
+                        </div>
+                        <div class="info-item">
+                            <span>Availability</span>
+                            <strong class="text-success">Available</strong>
+                        </div>
+                    </div>
+                    <button class="book-btn">
+                        <i class="fas fa-paper-plane"></i> Book Now
+                    </button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+     <!--Footer  -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row gy-4">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand">
+                        <div class="logo-icon">
+                            <img src="{% static '/images/logo32.png' %}" alt="Exploreo Logo" style="height: 80px; width: 80px;">
+                        </div>
+                        <span class="ms-2" style="font-family: 'Courier New', monospace;">Exploreo</span>
+                    </div>
+                    <p class="mt-3">Experience the world differently with TravelEase. We provide unforgettable travel experiences and exceptional service to make your dreams come true.</p>
+                    <div class="social-links mt-3">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+    
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Destinations</a></li>
+                        <li><a href="#">Tours</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Support -->
+                <div class="col-lg-2 col-md-6">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Newsletter -->
+                <div class="col-lg-4 col-md-6">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter for travel updates and special offers.</p>
+                    <form class="newsletter-form mt-3">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email address">
+                            <button class="btn btn-explore" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+            <!-- Bottom Bar -->
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>&copy; 2024 Exploreo. All rights reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p>Designed with <i class="fas fa-heart"></i> for travelers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script>
+    document.querySelector('.book-btn').addEventListener('click', () => {
+        alert('Booking successful! Check your email for confirmation.');
+    });
+
+    document.querySelectorAll('.highlight-item').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('highlight-item-active');
+        });
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+

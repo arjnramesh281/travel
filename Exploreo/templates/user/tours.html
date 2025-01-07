@@ -7,207 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/user/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/tour.css' %}">
     <style>
-.banner {
-  position: relative;
-  height: 60vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../../static/images/offer.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-  /* margin-bottom: -100px; */
-  z-index: 1;
-}
 
-.banner-content {
-  padding: 2rem;
-}
-
-.banner h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  margin-bottom: 1rem;
-  animation: fadeInUp 1s ease;
-}
-
-.banner p {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  animation: fadeInUp 1s ease 0.3s backwards;
-}
-
-.tour-packages-section {
-  position: relative;
-  padding: 8rem 2rem 4rem;
-  background-color: #f8f9fa;
-  z-index: 2;
-}
-
-.package-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  padding: 2rem 1rem;
-}
-
-.package-card {
-  display: flex;
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.package-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-}
-
-.package-image {
-  flex: 0 0 700px;
-  position: relative;
-  overflow: hidden;
-}
-
-.package-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s ease;
-}
-
-.package-card:hover .package-image img {
-  transform: scale(1.1);
-}
-
-.package-details {
-  flex: 1;
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.package-title {
-  font-size: 1.8rem;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
-.package-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
-  height: 3px;
-  background-color: #E67E22;
-}
-
-.package-info {
-  flex: 1;
-  display: grid;
-  gap: 1rem;
-}
-
-.package-info p {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-size: 1.1rem;
-  color: #555;
-  opacity: 0;
-  animation: slideIn 0.5s ease forwards;
-}
-
-.package-info i {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f8f9fa;
-  border-radius: 50%;
-  color: #E67E22;
-}
-
-.package-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.package-actions .btn {
-  padding: 0.8rem 1.5rem;
-  border-radius: 30px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-}
-
-.btn-outline-primary {
-  border-color: #E67E22;
-  color: #E67E22;
-}
-
-.btn-outline-primary:hover {
-  background: #E67E22;
-  color: white;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.package-info p:nth-child(1) { animation-delay: 0.1s; }
-.package-info p:nth-child(2) { animation-delay: 0.2s; }
-.package-info p:nth-child(3) { animation-delay: 0.3s; }
-.package-info p:nth-child(4) { animation-delay: 0.4s; }
-
-@media (max-width: 992px) {
-  .package-card {
-    flex-direction: column;
-  }
-  
-  .package-image {
-    flex: 0 0 300px;
-  }
-  
-  .package-details {
-    padding: 2rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .tour-packages-section {
-    padding: 6rem 1rem 2rem;
-  }
-  
-  .package-title {
-    font-size: 1.5rem;
-  }
-  
-  .package-info p {
-    font-size: 1rem;
-  }
-  
-  .package-actions {
-    flex-direction: column;
-  }
-}
     </style>
 </head>
 <body>
@@ -228,13 +30,13 @@
                         <a class="nav-link" href="../user_home"><i class="fas fa-home me-1"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-map-marked-alt me-1"></i>Destinations</a>
+                        <a class="nav-link" href="#"><i class="fas fa-map-marked-alt me-1"></i>Bookings</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../user_tour"><i class="fas fa-calendar-alt me-1"></i>Tours</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../contact    "><i class="fas fa-phone me-1"></i>Contact</a>
+                        <a class="nav-link" href="../contact"><i class="fas fa-phone me-1"></i>Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
@@ -254,7 +56,7 @@
       </section>
 
   <div class="tour-packages-section">
-    <h4 class="dashboard-title">Tour Packages</h4>
+    <h4 class="dashboard-title text-center">Tour Packages</h4>
     <div class="package-container">
       {% for package in packages %}
       <div class="package-card">
@@ -274,7 +76,7 @@
             <p><i class="fas fa-calendar"></i> {{ package.start_date }} - {{ package.end_date }}</p>
           </div>
           <div class="package-actions">
-            <a href="#" class="btn btn-outline-primary">
+            <a href="view_tour/{{package.id}}" class="btn btn-outline-primary">
               <i class="fas fa-compass"></i> View Details
             </a>
             <a href="#" class="btn btn-outline-dark">

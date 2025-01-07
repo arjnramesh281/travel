@@ -222,5 +222,11 @@ def contact(req):
 def user_tours(req):
     if 'user' in req.session:
         packages=TourPackage.objects.all()
-
         return render(req,'user/tours.html',{'packages':packages})
+    
+# -----------------user tour details----------------
+
+def user_tour_details(req,id):
+    if 'user' in req.session:
+        packages=TourPackage.objects.get(id=id)
+        return render(req,'user/view_tour.html',{'packages':packages})
