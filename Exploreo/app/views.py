@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView
 from django.db.models import Q
 from django.http import HttpResponse
+from datetime import datetime
 
 
 # Create your views here.
@@ -230,3 +231,65 @@ def user_tour_details(req,id):
     if 'user' in req.session:
         packages=TourPackage.objects.get(id=id)
         return render(req,'user/view_tour.html',{'packages':packages})
+    
+# -----------------user booking----------------
+
+def user_booking(req,id):
+    if 'user' in req.session:
+        packages=TourPackage.objects.get(id=id)
+        return render(req,'user/booking.html',{'packages':packages})
+
+
+# --------------create booking-----------------
+
+
+def create_booking(req, package_id):
+    # Fetch the selected package or return 404 if not found
+    package = get_object_or_404(TourPackage, id=package_id)
+
+    if req.method == 'POST':
+        try:
+            # Retrieve form data directly from POST request
+            first_name = req.POST['first_name']
+            last_name = req.POST['last_name']
+            email = req.POST['email']
+            phone = req.POST['phone']
+            guests = req.POST['guests']
+            preferred_date = req.POST['preferred_date']
+            special_requests = req.POST.get('special_requests', '')  # Optional field
+
+            # Create and save the booking, associating it with the current user
+            booking = Booking.objects.create(
+                user=req.user,  # Associate with the logged-in user
+                package=package,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                phone=phone,
+                guests=int(guests),
+                preferred_date=preferred_date,
+                special_requests=special_requests
+            )
+
+            # Redirect to the bookings page or another appropriate view
+            return redirect(view_bookings)  # Ensure 'view_bookings' is the correct name for the route
+        except KeyError:
+            # Handle missing fields
+            return HttpResponse("All required fields must be provided.", status=400)
+        except ValueError:
+            # Handle invalid data types (e.g., non-integer guests)
+            return HttpResponse("Invalid input for guests or other fields.", status=400)
+
+    # Render the booking form with the package details
+    return render(req, 'booking.html', {'package': package})
+
+
+# -------------view bookings-------------------
+
+def view_bookings(req):
+    if 'user' in req.session:
+        user_bookings = Booking.objects.filter(user=req.user)
+        return render(req, 'user/bookings_page.html', {'bookings': user_bookings})
+    if 'admin' in req.session:
+        all_bookings = Booking.objects.all()
+        return render(req, 'admin/bookings.html', {'bookings': all_bookings})

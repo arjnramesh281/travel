@@ -29,13 +29,13 @@
                         <a class="nav-link" href="../user_home"><i class="fas fa-home me-1"></i>Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-map-marked-alt me-1"></i>Bookings</a>
+                        <a class="nav-link" href="../view_booking"><i class="fas fa-map-marked-alt me-1"></i>Bookings</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../user_tour"><i class="fas fa-calendar-alt me-1"></i>Tours</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../contact    "><i class="fas fa-phone me-1"></i>Contact</a>
+                        <a class="nav-link" href="../contact"><i class="fas fa-phone me-1"></i>Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../logout"><i class="fas fa-sign-out-alt"></i>Logout</a>
@@ -92,7 +92,7 @@
                         <div class="banner-content">
                             <h2>Popular Destinations</h2>
                             <p>Explore top-rated locations loved by travelers worldwide</p>
-                            <button class="btn btn-explore">View Destinations</button>
+                            <a href="../user_tour"  class="btn btn-explore">View Destinations</a>
                         </div>
                     </div>
                 </div>
@@ -108,6 +108,51 @@
             </div>
         </div>
     </section>
+
+    <!-- About India Section -->
+<section class="banner-section">
+    <div class="container">
+        <!-- First Section - Image Right -->
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6">
+                <div class="pe-4">
+                    <h2 class="mb-4" style="color: #2e2c2c; font-weight: 600;">About Incredible India</h2>
+                    <p class="text-muted">
+                        Interesting and Intriguing, India offers incredible holiday experiences through its cultural, topography, and wildlife diversity. With these amazing and unique experiences, this south Asian country conveniently finds its way into the world tourism map as one of the finest destinations for a holistic vacation.
+                    </p>
+                    <p class="text-muted mt-3">
+                        India establishes its identity as the country of architectural masterpieces, making it an ideal travel destination to plan a heritage tour in the world. While Taj Mahal makes for the major draw on an India tour, there are a plethora of monuments and edifices in every India travel guide displaying the fine architecture and grandiose of different eras in the country.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="height: 400px; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <img src="{% static 'images/varanasi-india.webp' %}" alt="Incredible India Heritage" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Section - Image Left -->
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div style="height: 400px; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                    <img src="{% static 'images/wildlife-santury.webp' %}" alt="Indian Wildlife and Nature" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="ps-4">
+                    <h2 class="mb-4" style="color: #2e2c2c; font-weight: 600;">Explore Indian Wildlife</h2>
+                    <p class="text-muted">
+                        The diverse Indian topography adorned with the impressive Himalayas; long stretches of coastline; expansive hot, cold and white salt deserts; dense forests; alpine meadows and lakes; and scenic waterfalls pique the tourists' interest.
+                    </p>
+                    <p class="text-muted mt-3">
+                        India Tours offers a chance to explore its biodiversity in the country's many national parks and wildlife reserves. An enthralling experience entails in the India wildlife tour packages that take tourists to the habitats of Royal Bengal Tigers, one-horned rhinos, and snow leopards amongst many rare, endangered, and unique species of flora and fauna.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     <footer class="footer">
         <div class="container">

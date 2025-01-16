@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploreo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/admin/home.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top mb-4">
+        <div class="container-fluid">
+            <div class="logo me-4">
+                <div class="logo">
+                    <img src="{% static 'images/logo31.png' %}" alt="Company Logo">
+                </div>
+            </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link " href="../admin_home"><i class="fas fa-chart-line"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-calendar-check"></i>Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../tours"><i class="fas fa-route"></i>Add Tour Packages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../customer"><i class="fas fa-users"></i>Customers List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-cog"></i>Settings</a>
+                    </li>
+                </ul>
+
+                <div class="user-dropdown dropdown">
+                    <button class="btn dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle"></i>
+                        Admin User
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="../logout"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <h1>User Bookings</h1>
+
+    <!-- Bookings Content -->
+    <div class="container">
+        <div class="bookings-card">
+            {% if bookings %}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>User</th>
+                                <th>Package</th>
+                                <th>Guests</th>
+                                <th>Date</th>
+                                <th>Special Requests</th>
+                                <th>Contact Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for booking in bookings %}
+                                <tr>
+                                    <td>{{booking.first_name}}</td>
+                                    <td>{{ booking.package.package_name }}</td>
+                                    <td>{{ booking.guests }}</td>
+                                    <td>{{ booking.preferred_date }}</td>
+                                    <td>{{ booking.special_requests|default:"N/A" }}</td>
+                                    <td>{{ booking.phone }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="no-bookings">
+                    <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                    <h3>No Bookings Found</h3>
+                    <p>You haven't made any bookings yet. Start planning your next adventure!</p>
+                    <a href="../user_tour" class="btn btn-submit mt-3">Explore Tours</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="admin-footer fixed-bottom">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-copyright">
+                        <p>© 2024 Travel & Tourism Admin Panel. All rights reserved.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                        <a href="#"><i class="fas fa-file-alt"></i> Documentation</a>
+                        <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

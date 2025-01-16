@@ -40,7 +40,14 @@ urlpatterns=[
         # user tour details
     path('view_tour/<id>', views.user_tour_details, name='user_tour_details'),
 
+        # admin view booking
+    path('user_booking/<id>', views.user_booking, name='user_booking'),
 
+        # create bookings
+    path('create_booking/<package_id>', views.create_booking, name='create_booking'),
+
+        # view bookings
+    path('view_booking', views.view_bookings),
 
         # logout
     path('logout',views.admin_logout),
